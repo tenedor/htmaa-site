@@ -1,0 +1,22 @@
+-basePath = basePath || ""
+
+#navigation-bar
+  ul#navigation-menu
+    li#navigation-menu-home.navigation-menu
+      a(href='#{basePath || "."}') Home
+    li#navigation-menu-projects.navigation-menu
+      a(href='#') Projects
+      ul#projects-submenu
+        li.projects-submenu
+          a(href='#{basePath}computer-aided-design') Computer-Aided Design
+        li.projects-submenu
+          a(href='#{basePath}laser-cutter') Laser Cutter
+        li.projects-submenu
+          a(href='#{basePath}pcb-production') PCB Production
+        li.projects-submenu
+          a(href='#{basePath}3d-printing') 3D Printing
+    li#navigation-menu-about.navigation-menu
+      a(href='#{basePath}about') About
+    li#navigation-menu-mas863.navigation-menu
+      a(href='#{basePath}../../..') MAS.863
+#navigation-bar-shadow

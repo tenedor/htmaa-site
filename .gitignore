@@ -1,0 +1,7 @@
+img_raw/
+img/
+.DS_Store
+notes-to-self/
+*.html
+*.css
+*.sb
