@@ -14,7 +14,7 @@ block content
   p Lofting interpolates between a pair of planar surfaces to create a solid. Text characters were a quick way to make a complicated shape, so I tried lofting a triangle into a letter. It looked pretty cool, so I spelled out a word this way and put the pieces together. Initially I'd built each lofted letter individually and then added them together, but this led to ugly corners at the edges between letters. I did it a second time and lofted a full word from a platform of triangles and it turned out nicely.
   img(src='#{imgPath}antimony-lofted-triangles.jpg')
   p Since it was easy, I tried revolving the word, and I was surprised by how good it looked. It reminded me of a Google logo. (I tried revolving "Google" but it was unrecognizable.) As an abstraction of the word fabricate this revolved solid was a cool idea, but I wanted to make it clearer what the shape was. Initially I looked for a way to revolve a 2D shape only partway around an axis, but then I realized I wasn't thinking in Antimony's terms. The right way to go about it was to take the fully-revolved shape and cut away the parts I didn't want - the internally structure of the revolved letters was being maintained even if I only saw the external surface.
-  .multi-image.clearfix
+  .multi-image
     .w50p
       img.squeeze-right(src='#{imgPath}antimony-revolved-raw.jpg')
     .w50p
@@ -28,7 +28,7 @@ block content
   p Examining other people's prints on the Ultimaker, it looked like the smallest thickness I could trust would be 1.5mm, and 2mm was safer. I set the shape to be 15cm long (so 1.5mm minimum thickness) and Cura predicted a 7 hour print time, which seemed a bit too much. I dialed the width to 13cm and brought the print time down to just over 5 hours, which seemed acceptable. I selected the quickprint settings and saved the machine path to an SD card, then stuck it in the Ultimaker.
   img(src='#{imgPath}cura-screenshot.png')
   p The 3D printer was loaded with a gray filament but I found a red one that I liked better. Swapping filaments on the Ultimaker was straightforward. On the menu I selected "change" and it told me when I could pull out the existing filament, waited for me to insert a new one, and was easy to select the material. Initially it wasn't extruding, however, and I saw that it had ground down the filament next to the motor and wasn't being pushed further. Pushing on it manually didn't help, so I unloaded the material, cut an inch off the end, and loaded it back in. When the worn down piece of the filament reached the motor, I could push it across the boundary this time because the filament tip hadn't reached the nozzle yet. Loaded up again, the nozzle still wasn't extruding, and this time the feed gears kept clicking and resetting instead of pushing the filament. I googled this clicking noise and learned the nozzle probably wasn't hot enough, which was exactly correct - it even mentioned red PLA! Apparently the red has a higher melting point, so my general PLA settings weren't sufficient. I checked the roll of filament and learned I was on the low side - I'd been at 210 C and it recommended 210-230 C. I switched to 230 (and switched the plate from 60 to 65) and everything worked. It extruded a bit of gray residue that soon turned red and came out evenly. I'm pretty pleased with Ultimaker - I'd never set up a new material before or seen anyone do it, and it was nonetheless obvious, easy, and fast to set up and to troubleshoot.
-  .multi-image.clearfix
+  .multi-image
     .w250
       img.squeeze-left(src='#{imgPath}ultimaker-instructions.jpg')
     .w145
@@ -36,7 +36,7 @@ block content
     .w145
       img.squeeze-left(src='#{imgPath}ultimaker-back.jpg')
   p I set it to print my revolved word and it did. Well, it almost did. For the first three hours everything proceeded perfectly.
-  .multi-image.clearfix
+  .multi-image
     .w145
       img.squeeze-left(src='#{imgPath}revolved-printing-1.jpg')
     .w145
@@ -45,7 +45,7 @@ block content
       img.squeeze-left(src='#{imgPath}revolved-printing-3.jpg')
     .w145
       img.squeeze-left(src='#{imgPath}revolved-printing-4.jpg')
-  .multi-image.clearfix
+  .multi-image
     .w145
       img.squeeze-left(src='#{imgPath}revolved-printing-5.jpg')
     .w145
@@ -57,7 +57,7 @@ block content
   p But three and a half hours in I noticed the nozzle was moving a couple millimeters above the in-progress print, extruding nothing. Back behind the machine, the filament had slipped off the spool and started wrapping around the rod the spool spins on. Eventually it was too tight for the Ultimaker motor to pull against. A few millimeters' gap was too much for my print to recover from, and there was no way to rewind the tool path, so that print was as complete as it was going to get. It had gotten about three-quarters of the way done, counting the support material (Cura's 5h15m estimate had overshot things). So close! Oh well. I fixed the spool and started a new print.
   p Since I had three-quarters of my print, constituting a half-revolution of the word fabricate, it wasn't so bad looking. I cut away the support material and wispy carry threads using wire cutters. It took about an hour.
   p The bottommost parts of the print that had rested on the glass were squashed, flat, and shiny, and often snapping off the support walls had left white lines of sheered plastic, and I wanted to remove these. I tried sanding them away but it was ugly and a slow process. I got much better results using a soldering iron. Initially I set the iron to the printer nozzle temperature, 450 F, which was slow, but bumping it to 500 F worked great. I fixed the wide flat spots left by the glass, reconstructed the curves of my circles, and blended the wall remnants into their surroundings. Since the print hadn't finished, the hollow insides between the letter walls were exposed. It took a little while, but I closed over all the right-side-up letters so the two halves stood out. I was pretty happy with how it turned out.
-  .multi-image.clearfix
+  .multi-image
     .w145
       img.squeeze-left(src='#{imgPath}support-remains.jpg')
     .w145
@@ -66,7 +66,7 @@ block content
       img.squeeze-left(src='#{imgPath}sanded.jpg')
     .w145
       img.squeeze-left(src='#{imgPath}use-a-soldering-iron.jpg')
-  .multi-image.clearfix
+  .multi-image
     .w145
       img.squeeze-left(src='#{imgPath}reconstructed-curves-1.jpg')
     .w145
@@ -76,21 +76,21 @@ block content
     .w145
       img.squeeze-left(src='#{imgPath}filled-openings.jpg')
   p This time the Ultimaker finished my complete print. It took 4 hours. Cleaning it, however, took almost as long! I spent three hours cutting away support material and stray filament strings, then another twenty minutes making small edits with the soldering iron.
-  .multi-image.clearfix
+  .multi-image
     .w190
       img.squeeze-left(src='#{imgPath}revolved-printing-round-2-top.jpg')
     .w190
       img.squeeze-left(src='#{imgPath}revolved-printing-round-2-front.jpg')
     .w190
       img.squeeze-left(src='#{imgPath}revolved-printing-round-2-back.jpg')
-  .multi-image.clearfix
+  .multi-image
     .w190
       img.squeeze-left(src='#{imgPath}revolved-printed-1.jpg')
     .w190
       img.squeeze-left(src='#{imgPath}revolved-printed-2.jpg')
     .w190
       img.squeeze-left(src='#{imgPath}revolved-printed-3.jpg')
-  .multi-image.clearfix
+  .multi-image
     .w120
       img.squeeze-left(src='#{imgPath}cutting-1.jpg')
     .w120
@@ -102,13 +102,13 @@ block content
     .w120
       img.squeeze-left(src='#{imgPath}cutting-5.jpg')
   p Finally, though, I had my piece. It turned out sufficiently accurately that it rolls smoothly along the full 270 degrees of its back. All the letters stand out clearly, and they both form a concrete word and behave as abstract sculptural forms. I like it best when it's oriented upside-down to me so the word-ness doesn't overwhelm the abstract shapes. It's fun to roll back and forth, fun to look at from all sorts of angles, fun especially for the separated arc of the dot on the i. I like it.
-  .multi-image.clearfix
+  .multi-image
     .w50p
       img.squeeze-right(src='#{imgPath}revolved-fabricate-final-bottoms.jpg')
     .w50p
       img.squeeze-left(src='#{imgPath}revolved-fabricate-final-small.jpg')
   p Why stop there, though? I was weary of trimming support material, but the lofted-from-triangles word didn't require any supports. I swapped the Ultimaker filament to gray and printed out my earlier design. I ran into minor troubles with the plate being too cold and the first layers of the print peeling up - apparently Cura can encode nozzle and plate temperatures into the .gcode file it outputs, and these override whatever settings you've set the printer to - but I got it working. This print took a little over an hour and required pretty much no post-processing work. Not as nice as the revolved word, but a nice counterbalance. I'm impressed with how sharp the corners turned out.
-  .multi-image.clearfix
+  .multi-image
     .w33p
       img.squeeze-right(src='#{imgPath}lofted-fabricate-top.jpg')
     .w33p

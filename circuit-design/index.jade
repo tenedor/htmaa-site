@@ -1,0 +1,23 @@
+extends ../jade/page.jade
+
+block basePath
+  -basePath = "../"
+
+block relativePath
+  -relativePath = "circuit-design/"
+
+block content
+  h1 Circuit Design
+  p As a first exploration towards building a keyset, I designed a simple board that would take continuous input from four buttons and control an RGB LED in response. This will let me figure out how long to buffer keypresses for to determine what keypress combinations a user considers one simultaneous input versus multiple discreet inputs, and it will let me build basic software infrastructure for mapping keypress combinations to values and outputting those values.
+  p I intended to mill the board into PCB and fill it but the mill was acting up, so I haven't gotten there yet. Here were my experiences designing the board, however.
+  img(src='#{imgPath}eagle-schematic.jpg')
+  img(src='#{imgPath}eagle-info.jpg')
+  img(src='#{imgPath}eagle-grid-size.jpg')
+  img(src='#{imgPath}eagle-board.jpg')
+  .multi-image
+    .w50p
+      img.squeeze-right(src='#{imgPath}traces.png')
+    .w50p
+      img.squeeze-left(src='#{imgPath}outline.png')
+  img(src='#{imgPath}insufficient-toolpath.jpg')
+  img(src='#{imgPath}correct-toolpath.jpg')

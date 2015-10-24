@@ -11,33 +11,33 @@ block content
   p This week I made a working circuit board out of a design for a programmer chip. I milled the board, soldered components onto it, and programmed it. Here was the result:
   img(src='#{imgPath}finished-board.jpg')
   p I started from an existing board schema. I cut the design into PCB using a Roland Modela mill. To do this, I first wiped down my PCB with alcohol, and similarly cleaned the surface of the sacrificial layer mounted in the mill bed. I affixed the board onto this bed with double-sided tape.
-  .multi-image.clearfix
+  .multi-image
     .w50p
       img.squeeze-right(src='#{imgPath}board-traces.png')
     .w50p
       img.squeeze-left(src='#{imgPath}board-outline.png')
   p Next was to set up the mill. I checked that the computer next to the mill was set up to talk to the mill, then using the fabmodules interface I loaded the standard settings into the mill. I input the PNG trace image I had and selected Roland mill trace cutting as my output. To calibrate the mill, I first raised the drill bit (a 1/64" bit) up high for safety, then used fabmodules to give the mill an offset to the starting edge on my board. Once the drill bit's x and y coordinates were in place, I lowered the bit to the surface of my board and tightened the screws. Make sure to hold the bit down against the board while tightening the screws so it doesn't slip off the surface, and make sure to tighten the screws really well! (On the Roland, there are two screws on the drill bit - first tighten both screws lightly, then go back and tighten each firmly.) The first few times I tried to mill my board it stopped cutting traces deeply enough after about twenty seconds. I had to tighten the screws really hard before it cut correctly.
   p Once that's set up, I checked that the fabmodules settings matched my setup (0.1mm cut depth for me, 1/64" drill bit, 4 drill offsets of material to remove) and told it to calculate the drill path. It generated an image with thin black lines marking the drill cuts and red lines showing the drill hopping to a new location. This looked right so I sent it to the mill.
-  .multi-image.clearfix
+  .multi-image
     .w36p
       img.squeeze-right(src='#{imgPath}milling-front.jpg')
     .w64p
       img.squeeze-left(src='#{imgPath}milling-top.jpg')
   p The milling can be paused or canceled from a progress window that opens up on the computer. When I'd seen my early boards not getting cut deeply enough, I canceled the cut and started over. Eventually I figured out my mistake and cut the board successfully, which took about fifteen minutes.
-  .multi-image.clearfix
+  .multi-image
     .w36p
       img.squeeze-right(src='#{imgPath}poorly-milled.jpg')
     .w64p
       img.squeeze-left(src='#{imgPath}sending-traces.jpg')
   p To cut the board out of the surrounding PCB stock, I repeated this process with an outline board image, a 1/32" drill bit, and the mill's outline settings. This took another couple minutes.
-  .multi-image.clearfix
+  .multi-image
     .w50p
       img.squeeze-right(src='#{imgPath}finished-milling-1.jpg')
     .w50p
       img.squeeze-left(src='#{imgPath}finished-milling-2.jpg')
   p The milling done, I brought the mill bed out from under the drill bit and vacuumed off all the PCB dust. I knifed the board off the bed and scrubbed it with a rough sponge, then rinsed it again with alcohol. Everything looked right.
   p Now I gathered my board components. Examining the board schematic, I wrote the components I needed on an index card next to a piece of double-stick tape, then found each component and stuck it on the tape next to its label. The surface-mount components are small and hard to distinguish, so this helps keep track of what's where.
-  .multi-image.clearfix
+  .multi-image
     .w50p
       img.squeeze-right(src='#{imgPath}board-schema.png')
     .w50p

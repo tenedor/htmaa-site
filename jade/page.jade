@@ -1,8 +1,14 @@
+block name
+  -name=""
+
+block pageId
+  -pageId = name ? name + "-page" : ""
+
 block basePath
   -basePath = ""
 
 block relativePath
-  -relativePath = ""
+  -relativePath = name ? name + "/" : ""
 
 block imgPath
   -imgPathGlobal = basePath + "img/"
@@ -16,7 +22,8 @@ html(lang='en')
       link(rel='stylesheet', href='#{basePath}../../lib/bootstrap-3.3.5/css/bootstrap.min.css')
       link(rel='stylesheet', type='text/css', href='#{basePath}main.css')
   block body
-    body
+    -bodyAttributes = pageId ? {'id': pageId} : {}
+    body&attributes(bodyAttributes)
       block navigationBar
         include navigation-bar.jade
 

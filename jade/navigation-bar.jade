@@ -1,5 +1,15 @@
 -basePath = basePath || ""
 
+-
+  projectsSubmenu = [
+    ["Computer-Aided Design", "computer-aided-design"],
+    ["Laser Cutter", "laser-cutter"],
+    ["PCB Production", "pcb-production"],
+    ["3D Printing", "3d-printing"],
+    ["Shop Bot", "shop-bot"],
+    ["Circuit Design", "circuit-design"],
+  ]
+
 #navigation-bar
   ul#navigation-menu
     li#navigation-menu-home.navigation-menu
@@ -7,14 +17,9 @@
     li#navigation-menu-projects.navigation-menu
       a(href='#') Projects
       ul#projects-submenu
-        li.projects-submenu
-          a(href='#{basePath}computer-aided-design') Computer-Aided Design
-        li.projects-submenu
-          a(href='#{basePath}laser-cutter') Laser Cutter
-        li.projects-submenu
-          a(href='#{basePath}pcb-production') PCB Production
-        li.projects-submenu
-          a(href='#{basePath}3d-printing') 3D Printing
+        each item in projectsSubmenu
+          li.projects-submenu
+            a(href='#{basePath}#{item[1]}') #{item[0]}
     li#navigation-menu-about.navigation-menu
       a(href='#{basePath}about') About
     li#navigation-menu-mas863.navigation-menu
