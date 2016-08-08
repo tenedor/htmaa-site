@@ -1,0 +1,22 @@
+extends ../jade/page.jade
+
+block basePath
+  -basePath = "../"
+
+block relativePath
+  -relativePath = "input-devices/"
+
+block content
+  h1 Input Devices
+  p This week I worked on a capacitive sensing board. In particular, I wanted to detect human touch anywhere along 10 meters of quarter-inch copper wire that I would lay out around my room; when someone touched this, the board would enable other devices by switching mosfets connected to a pin header.
+  p I extended a motor control board with some voltage dividers between three ATtiny pins and ground. The middle of each divider connected to a corresponding pin on the programming header, which in turn would would be connected to the capacitive copper lines I'd run around my room. (I did this for three pins because it was easy to fit it for three; one pin will drive the copper lines with a square wave, and since I'll have two left, I'll be able to have two different regions of copper lines, one read by each sensor.) The original motor control design gave me four mosfets and ground connecting unregulated power to a 2x3 header for sending switched power wherever I wanted.
+  .multi-image
+    .w33p
+      img(src='#{imgPath}milled-board.jpg')
+    .w33p
+      img(src='#{imgPath}components.jpg')
+    .w33p
+      img(src='#{imgPath}filled-board.jpg')
+  p Later, I concluded my RC design had been wonky and I shouldn't have used a divider, and that either the driving pin or the reading pins shouldn't have had resistors. At the time of writing this, I'm not quite sure what I was thinking.
+  p Anyway, I milled and filled the board and started playing with it at an oscilloscope, sending a square wave from one of the divider pins and watching response in relation to different capacitive interactions. I ran out of time before getting too far. I never came back to playing with sensors, unfortunately - this remains a future project.
+  p Here are the Eagle #[a(href='cap-sensing.sch') schematic] and #[a(href='cap-sensing.brd') board] for this design.

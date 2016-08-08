@@ -9,7 +9,7 @@ block relativePath
 block content
   h1 Laser Cutter
   p This week I used a laser cutter to build a general-purpose cardboard construction set. I built 3D models in Antimony, exported them as PNGs, and laid them out in CorelDRAW for sending to the laser. Here's something I built with my construction set.
-  img(src='#{imgPath}flex-joints-construction-0.jpg', width='487px')
+  img(src='#{imgPath}flex-joints-construction-0.jpg', width='470px')
   .image-caption
     | flexible construction pieces
   p To do this, I started with some code Neil wrote specifying square building blocks with various joint types. It generated this output:
@@ -25,13 +25,13 @@ block content
   p When it's done, turn off the gas. Open the laser cutter lid and let it air out a bit, then remove your pieces and throw out any cardboard scraps. (You don't want to leave an uneven surface for the next person.) One tip for pulling out your pieces is to lift them out with masking tape.
   p This was supposed to let me test the five joint types, but the first cut was a flop - I'd determined the slot width should be 0.157", but then I set it to 0.1". Whoops. So I did a second cut. The triangular mouthed slot made them easier to fit together, but the mouth was way wider than necessary (100% gain over the slot width). I parameterized its width in my var list and reduced it to 50% gain. The other three joints were dysfunctional. For now I put that concern aside - it might be fun to return to, but I have a good enough joint in the triangular-mouthed slot.
   p Now I wanted construction pieces other than squares. I started with regular polygons with n sides. An n-gon can be made from n identical triangles with a shared center pieced together like pizza slices. (Draw a line from each vertex to the center; these divide it into identical isosceles triangles.) The inner angle of each triangle is 2 pi / n, so for a fixed side width the shortest radius to the edge is width / 2 tan(pi / n). The radius to a corner is width / 2 sin(pi / n). So I added numSides as an input in my var list and calculated radiusToEdge and radiusToCorner as two other vars. I set numSides to 4 for starters so I could compare my refactoring progress to Neil's original square tiles. This helped me catch multiple mistakes. I changed the slot rectangle's starting x position from -var.width/2 to -radiusToEdge and made similar substitutions in the other joints. I built a triangle in terms of numSides and removed the slot from it, the first quarter of a square tile. Varying n varies the slotted triangle correctly. Multiplying the triangles with Atimony's polar array completes the polygon. Swapping the joint type for more advanced slots works as it should.
-  img(src='#{imgPath}antimony-ngon-slotted-triangles.png')
+  img(src='#{imgPath}antimony-ngon-slotted-triangles.jpg')
   .image-caption
     | slotted triangles for n = 3, 4, 5, 6, 10
-  img(src='#{imgPath}antimony-ngons.png')
+  img(src='#{imgPath}antimony-ngons.jpg')
   .image-caption
     | and the corresponding polygons
-  img(src='#{imgPath}cardboard-polygons.png')
+  img(src='#{imgPath}cardboard-polygons.jpg')
   .image-caption
     | all edge sizes are 1.5"
   img(src='#{imgPath}polygons-construction.jpg')
@@ -169,13 +169,4 @@ block content
   img(src='#{imgPath}flex-joints-construction-1.jpg')
   .image-caption
     | constructions with flexible pieces
-  p There's more I'd like to do, but I'm out of time for now. If you'd like, here's my #[a(href='flexure-joints.sb') Antimony script for these components]. I've also written up some #[a(href='../thoughts-on-antimony') Antimony tips] from my experiences so far, and I've posted the code for an as-yet-undocumented #[a(href='slotted-rings.sb') Antimony reproduction] of #[a(href='http://fab.cba.mit.edu/classes/863.14/people/dan_chen/computer-controlled-cutting-laser-cutter/', target='_blank') Dan Chen#{"'"}s Interlocking Circle pressfits]. As closing commentary, here are a list of feature requests and bugs I encountered while using Antimony. The list is long because I really want Antimony to succeed - I'm loving using it, and that's come through in a long list of desires for the young project.
-  h3 As of 9/23/2015:
-  p In Antimony, I really want the ability to define a node in terms of a graph of nodes. This is the number one feature! The code duplication that's occurring from the lack of this feature is nails-on-chalkboard level horrible, I physically cringe when I look at it, plus of course it's a huge cost for any non-trivially-sized project. I've heard from Neil that this is Matt's top priority major feature currently under development, so look forward to its release!
-  p Antimony crashes often, which can be a bit annoying. The irony, though, is that it's actually hard to lose more than a couple minute's work because I save every few minutes. Antimony crashes regularly enough to keep the value of saving often fresh in my mind.
-  p Antimony's inability to undo pasted nodes is quite annoying. It will undo node moves and deletes, which is good, except if I want to undo changes to a node that happened before I copied it, there is no way to be able to see that node as I undo changes to it because the copy was pasted right over it, and unrolling the undo stack to get to the changes I want to undo by necessity un-deletes the duplicate node, un-moves it away from the original, and then leaves it covering the original and obscuring any undoing that's applied to that node.
-  p A smaller bug is that undoing a shape input wiring does not restore the previous input value in that node.
-  p Often when I try to alter the connections on a duplicated node it will connect to some seemingly random other node. When this happens, the only way to resolve it is to delete the copied node and build a replacement from scratch.
-  p I would like to open multiple files in Antimony simultaneously. I would like to copy nodes from one file to another.
-  p I would like a CTRL-F "find" function to search for things with a given name. I would like the ability to rename a variable at every location it exists.
-  p I would like a way to add comments to the graph editor. For instance, perhaps I could tag nodes with text, and the annotation would appear above the node wherever it went. When I'm zoomed far out on the graph I'd like to see comments identifying what each graph region is doing. This composition of comments (only the more general comments appearing at more zoomed out levels, but seeing higher-density of comments as you zoom in) could play nicely once I can define node hierarchies through grouping them as functions.
+  p There's more I'd like to do, but I'm out of time for now. If you'd like, here's my #[a(href='flexure-joints.sb') Antimony script for these components]. I've also written up some #[a(href='../thoughts-on-antimony') Antimony tips] from my experiences so far, and I've posted the code for an as-yet-undocumented #[a(href='slotted-rings.sb') Antimony reproduction] of #[a(href='http://fab.cba.mit.edu/classes/863.14/people/dan_chen/computer-controlled-cutting-laser-cutter/', target='_blank') Dan Chen#{"'"}s Interlocking Circle pressfits].

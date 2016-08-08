@@ -1,0 +1,58 @@
+extends ../jade/page.jade
+
+block basePath
+  -basePath = "../"
+
+block relativePath
+  -relativePath = "laser-keyset/"
+
+block content
+  h1 Laser Keyset
+  p For my final project, I returned to my idea from week 1 of merging a keyset with a pointing device. I made a hand-held laser-pointer that incorporates three data buttons in addition to the laser on/off button. It interfaces to a computer over a wired connection (FTDI serial) - the next iteration will be wireless.
+  p The key challenge turned out to be making everything compact. I had a strong sense from the beginning of the proper handle size, no more than 1 inch, and I wanted the wires and electronics nicely sealed inside.
+  p My first step was in software though. I spent longer than I'd like to admit getting serial communication running round-trip between my ATtiny44 and a python script on my computer. I kept mixing up Tx and Rx, for one. I got it going eventually though.
+  p The next challenge was fitting a shell tightly onto the laser diode. I printed about a dozen small half-shells to work out the best dimensions for gripping the thin ridge in the diode to hold it in place.
+  p I generalized the diode shell into a larger handle, first printing a half-length handle to test a few concepts. At the faster print rate I wanted to use for the handle, the diode shell had too little resolution to function, so instead of baking the shell straight into the handle halves I made handle depressions that would accept diode shell inserts.
+  p For the keyset buttons, I built a sideways extension that was comfortable to rest one's fingers on. The extension was made from a wooden dowel into which I hand-drilled a 45-degree cylindrical hole to fit the shape of the primary handle. I placed a button on the extension handle for fingers three, four, and five.
+  p I had planned to attach an FTDI cable straight to the board and run it out the base of the handle, but I measured the wrong cable radius and ended up with too little space to fit the cable. I ran a ribbon cable extension out the bottom instead, which turned out to be a lucky call - I later ended up gluing the shell together (not something I'd originally planned), and this way I can quickly plug and unplug from the long and heavy FTDI cable.
+  p Many of my wires ended up being soldered directly onto copper pads on my board. The external buttons were soldered onto copper tape that I'd run around the exteriors of the handles. In both cases, I'd test with a multimeter that an electrical connection had been made, then I'd hot-glue over the wire join to hold it in place. Getting the electrical connection sometimes took multiple tries, especially for the buttons - the copper tape didn't stay down very well, and the rounded surface was difficult to join to the legless buttons.
+  p I ran end-to-end tests of each component - the four input buttons and the laser diode and serial outputs - and each part worked. This was great news!
+  p Fitting the various pieces together was a bit jammed since I'd kept the tolerances tight to keep total size down, but I got things together. I tested each component again with everything packaged up to confirm it worked, then glued the wooden handle in place and sealed everything in. It continues to work.
+  p Here are various pictures:
+
+  .multi-image
+    .w145
+      img(src='#{imgPath}laser-harness-test.jpg')
+    .w145
+      img(src='#{imgPath}handle-test.jpg')
+    .w145
+      img(src='#{imgPath}milled-board.jpg')
+    .w145
+      img(src='#{imgPath}filled-board.jpg')
+
+  .multi-image
+    .w145
+      img(src='#{imgPath}wood-handle-drilled.jpg')
+    .w145
+      img(src='#{imgPath}wood-handle-traces-1.jpg')
+    .w145
+      img(src='#{imgPath}wood-handle-traces-3.jpg')
+    .w145
+      img(src='#{imgPath}wood-handle-traces-4.jpg')
+
+  img(src='#{imgPath}wood-handle-buttons.jpg')
+  img(src='#{imgPath}antimony-handle.jpg')
+  img(src='#{imgPath}ftdi-wired.jpg')
+  img(src='#{imgPath}assembled-electronics-components.jpg')
+
+  .multi-image
+    .w33p
+      img(src='#{imgPath}end-to-end-testing-1.jpg')
+    .w33p
+      img(src='#{imgPath}end-to-end-testing-2.jpg')
+    .w33p
+      img(src='#{imgPath}end-to-end-testing-3.jpg')
+
+  img(src='#{imgPath}all-buttons-pressed.jpg')
+
+  p If you're interested in the code, here are the #[a(href='laser-pointer.44.py') python], #[a(href='laser-pointer.44.c') c], and #[a(href='laser-pointer.44.make') make] files. Here is the #[a(href='laser-pointer.sb') Antimony] CAD file.

@@ -8,9 +8,29 @@ block relativePath
 
 block content
   h1 Computer-Aided Design
-  p Coming soon. I do apologize - my computer harddrive went inaccessible for multiple days when I had expected to wrap this up, and I haven't yet made up the time. But check out the #[a(href='../laser-cutter') laser cutter] project for ample use of 3D-modeling tool Antimony.
-  p As a teaser, however, here is my progress to date.
-  img(src='#{imgPath}keyset-0-top.jpg')
-  img(src='#{imgPath}keyset-0-front.jpg')
-  img(src='#{imgPath}keyset-0-bottom.jpg')
-  img(src='#{imgPath}keyset-0-back-angle.jpg')
+  p Doug Engelbart is popularly known for inventing the computer mouse. (He should be popularly known for founding a discipline of augmenting humans' capacities to solve complex problems, but that's its own topic.) He didn't think a mouse should be used in isolation, though; he invented a one-handed keyboard for use by the off-hand during mouse manipulations. This "keyset" had five keys, one per finger, and combining simultaneous key presses produced 31 unique output values - enough for A-Z and five non-alpha characters. Commands from the keyset would be directed by the mouse's pointing.
+  p After Engelbart's inventions of them at SRI in the 60s, the mouse and keyset traveled to Xerox PARC for the 70s and were picked up by Steve Jobs in 1979. Jobs commercialized the mouse and correctly dismissed the keyset as too complicated for the consumer audience he was about to introduce to graphical UIs. Apple GUIs encoded the design assumption that a user manipulating a mouse wasn't doing anything else at the same time. The 1984 Macintosh computer launched the mouse to fame and this design assumption along with it and the keyset never made it beyond historical footnote-dom.
+  p Which it probably never should have. A user's keyboard can already be used as a keyset with the appropriate software, and touch detection on track pads could disambiguate keypresses signifying distinct keyboard inputs from those signifying keyset commands.
+  p As we transition from the personal computer to ubiquitous computing and wearables, though, one-handed character input is interesting for new reasons. There's no longer an assumption of a two-handed keyboard at the human-computer interface, and there's no longer a constraint of sitting at a desk in a fixed orientation.
+  p Anyway, I don't expect it to go anywhere grand, but I'd like to take the keyset for a spin. In particular, I think I'll play with incorporating five finger-buttons into a device with a laser pointer, optical mouse sensor, and wireless communication chip. The device can rest on a table as a mouse or be used for in-air gesturing with the laser. It's a clunky mashup of ideas to jam together but should be fun to design and play with.
+  p I started playing with a CAD tool called Antimony to mock up a design but didn't get too far. For one, my computer's hard drive cable broke only a few hours into the project and I've been working on other things since. But I've also concluded Antimony is the wrong tool for the job. Antimony uses a 3D-solids functional representation of objects and constructs complexity by applying transformations to existing objects. The starting objects are a small set of geometrically regular 2D and 3D primitives. This makes it difficult to create biologically-inspired forms with high amounts of non-symmetric complexity and nuance. Tools that offer interpolation on 1D curves and control point manipulation are better suited to the task. When I get back to this project I think I'll try playing with Rhino.
+  p Anyway, here are screenshots of where I got in Antimony.
+  p I first made a simple test object. I intersected a cube and sphere and subtracted some cylinders from inside. I colored the result red. Antimony lets you export designs to a mesh (.stl) or a heightmap (.png). Initially trying to export as a heightmap would crash Antimony, but I worked with Antimony's creator Matt Keeter and we got this fixed.
+  img(src='#{imgPath}antimony-experiment.png')
+  .image-caption
+    | the left shape is the middle shape minus the right shape
+  img(src='#{imgPath}experiment-heightmap.png')
+  .image-caption
+    | exported heightmaps of the shapes above
+  p I then set about making the augmented keyset. A typical mouse design assumes only the first two fingers are used to press keys, and the other two fingers and sometimes the thumb are rendered inactive. A larger object is useful when each finger needs to be active. Using my own hand and a physical object (a voltmeter) as a keyset model, I began designing in Antimony a simple hand in concert with the augmented keyset so that I could subtract finger depressions from the keyset block and otherwise sculpt the block to match the hand. This was very slow going though - one big mistake was I didn't use an intermediate representation between my real-world model and my digital model, and tweaking the positions and rotations of Antimony elements was a slow way to design. I should have taken a list of measurements of my hand's positions and dimensions and then transferred these into Antimony all at once. But here's what I'd built before my hard drive cable curtailed further work.
+  .multi-image
+    .w50p
+      img.squeeze-right(src='#{imgPath}keyset-0-top.jpg')
+      img.squeeze-right(src='#{imgPath}keyset-0-bottom.jpg')
+    .w50p
+      img.squeeze-left(src='#{imgPath}keyset-0-front.jpg')
+      img.squeeze-left(src='#{imgPath}keyset-0-back-angle.jpg')
+  .image-caption
+    | small steps towards modeling a hand holding a keyset
+  p Here are the Antimony files for the #[a(href='test-object.sb') test object] and #[a(href='keyset.sb') keyset].
+  p I've worked with Antimony quite a lot since this modeling work and quite like it. In particular, I documented #[a(href='../laser-cutter') my Antimony workflow for a laser-cut cardboard project], and I wrote up some #[a(href='../thoughts-on-antimony/') general thoughts on Antimony].

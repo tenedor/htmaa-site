@@ -60,9 +60,14 @@ literal(sel, prop, val)
       {prop}: val
 
 // width literals, e.g. ".w33 {width: 33px}"
-width-literals = 33% 36% 50% 64% 145 190 250
+width-literals = 14% 33% 36% 50% 64% 145 190 255 260 270 308 330
 for val in width-literals
   literal('w', 'width', val)
+
+// margin-right literals, e.g. ".mr10 {margin-right: 10px}"
+margin-right-literals = 10
+for val in margin-right-literals
+  literal('mr', 'margin-right', val)
 
 #navigation-bar
   position: fixed
@@ -109,7 +114,7 @@ for val in width-literals
       position: absolute
       left: 0px
       top: 48px
-      width: 180px
+      width: 185px
       padding: 3px
       background-color: white
 
@@ -163,8 +168,19 @@ img
     float: left
 
   img
+    max-width: 100%
+
     &.squeeze-left
       margin-left: 10px
 
     &.squeeze-right
       margin-right: 10px
+
+.galleries
+  > .gallery
+    > *
+      padding: 5px;
+      float: left
+
+      img
+        width: 100%

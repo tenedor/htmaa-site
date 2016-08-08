@@ -8,25 +8,107 @@ block relativePath
 
 block content
   h1 Thoughts on Antimony
-  br
-  p Here is an unedited, very rough initial mind-dump of tips for writing code with Antimony. Hopefully I'll make it nicer before long. See my #[a(href='../laser-cutter') laser cutter project] for examples of using Antimony and further thoughts.
-  br
+  p Here are some thoughts on designing projects with Antimony.
+  ol
+    li #[a(href='#usage-tips') Usage Tips]
+    li #[a(href='#feature-requests') Feature Requests]
+    li #[a(href='#bugs') Bugs]
+    li #[a(href='#gallery') Gallery], with the .sb files that implement them
+  p For examples of using Antimony and for further thoughts, visit my project pages on #[a(href='../laser-cutter') laser cutting], #[a(href='../3d-printing') 3D printing], and #[a(href='../molding-and-casting') molding and casting].
+  p I really want Antimony to succeed. I'm loving using it, and that's come through in a long list of desires for the young project.
+  p These thoughts were last updated in November 2015.
+
+  a#usage-tips.anchor
+  h3 Tips on Technique
   ul
-    li Often suppressing shape output is helpful. I like to use the following simple script:
-      pre
-        | import fab
-        | 
-        | title('Plug')
-        | input('plug', fab.types.Shape)            
+    li Often suppressing shape output is helpful. Note the CSG->Hide function.
     li Building components at the origin and only rotating and translating them into position as the last step greatly simplifies reasoning. Injecting rotations and translations early in the pipeline quickly tangles your code.
-    li There's an option to hide the UI markup on the view (with the View window active, select View > Hide UI from the top toolbar). I find I'm almost exclusively working in the graph, and it's helpful to remove the UI handles.
+    li There's an option to hide the UI markup on the view (with the View window active, select View > Hide UI from the top toolbar). I find I'm almost exclusively working in the graph, and it's helpful to remove the UI handles so I can see what I'm building. I'd like an Antimony feature for selecting a subset of all UI handles to show, but it doesn't currently exist.
     li Maintaining a variables list at the top of your graph is very helpful - this lets you keep track of your major parameters and adjust them from a single location. For larger projects, I'll make an additional variables list for a subcomponent that has some configurable pieces, and I'll position that list at the top of the subcomponent's graph. Variables lists can also compute values from their inputs and present them as outputs - don't limit yourself to inputting.
     li To use a value from another node, you can pipe the value over to the node that wants it. But you can also refer to it by name! Each node has a unique name in its top left corner. The name is populated by default but editable, and it forms an object whose properties can be accessed via dot notation (for a rectangle r0, its shape is r0.shape). Naturally, then, you should give all nodes and all their properties names that use only {A-Za-z0-9-_} so that they can be referenced by other nodes - Antimony should enforce this style on you, but since it doesn't, enforce it on yourself.
     li When you use another node's value by name, you can use it as part of an expression like r0.width * 2.
     li Since you have a choice about whether you use a node's value by reference or by graph connection, there's some style to develop about when you choose one or the other. I like to use connectors to emphasize the key transformations in constructing a component, and tend to keep connected graphs to 10 or 15 nodes max (and usually they're more like 5). When piecing together subcomponents made of more than a couple nodes, I tend to refer to them by name.
-    li As you compose larger models from smaller ones, keep the smaller components in your view. A good way to do this is to define per-component location points. Say your component point is named p. After building the component at the origin, translate it by p to its permanent location. If someone at location q wants to use it, they should translate it by q - p to use it. Better yet, name the component before translating it from the origin so you won't have to keep track of the component's associated location point.
-    li Keep in mind that you can edit Antimony nodes. There are all sorts of small ways this comes in handy to keep your code simple. For instance, if you want to union four objects, edit the Union node to take four shape inputs; to subtract two things from an object, edit the Difference node to have positive input a and negative inputs b1 and b2. (You can also enter multiple shapes into a single Shape input in a node, which is cool, but I don't recommend actually doing it - making shape transformations explicit in the graph structure will keep your code more maintainable. But yes - if you graphically connect multiple shapes to the same input node, the input node will consider their union; if you textually input shapes by reference, you can use shape operators like |, &, and ~.)
-    li Find some simple pattern for organizing your node layouts and stick to it. I like to arrange nodes in short vertical columns (2-4 nodes), to tie columns together left to right, and to organize blocks of connected or otherwise tightly related columns into vertically stacked regions of related components. Looking through some code samples to see how experienced users have organized their graphs is a good way to develop your style, and more generally to pick up lots of tips.
+    li As you compose larger models from smaller ones, keep the smaller components in your view. A good way to do this is to define x and y grid dimensions and move translate each component to a unique point (a, b) where a and b are integer multiples of the x and y grid dimensions. Remember to name the component before translating it from the origin so you won't have to keep track of the component's associated location point when you want to reuse it.
+    li Keep in mind that you can edit Antimony nodes. There are all sorts of small ways this comes in handy to keep your code simple. For instance, if you want to union four objects, edit the Union node to take four shape inputs; to subtract two things from an object, edit the Difference node to have positive input a and negative inputs b1 and b2. (You can also enter multiple shapes into a single Shape input in a node, either by piping them in or combining their names with the shape operators &, |, and ~, but I don't recommend actually doing it - making shape transformations explicit in the graph structure will keep your code more maintainable.)
+    li Find a simple pattern for organizing your node layouts and stick to it. I like to arrange nodes in short vertical columns (2-4 nodes), to tie columns together left to right, and to organize blocks of connected or otherwise tightly related columns into vertically stacked regions of related components. Looking through some code samples to see how experienced users have organized their graphs is a good way to develop your style, and more generally to pick up lots of tips.
     li If multiple nodes are going to use a component but you want to try different versions of that component, add a layer of indirection: make a Shape List script and wire things up to use the list's properties, then swap out different shapes for those values to try different things.
-    li When you're writing scripts with numbers, you can enforce constraints on the inputs inside the script. For instance, if you're doing a division with the input x, include a quick line that sets x to 1 if it equals 0. Forgetting to do this can lead to ugly failure modes like causing Antimony to hang or crash.
+    li When you're writing scripts with numbers, you can enforce constraints on the inputs by editing the script. For instance, if you're doing a division with the input x, include a quick line that sets x to 1 if it equals 0. Forgetting to do this can lead to ugly failure modes like causing Antimony to hang or crash.
     li Sometimes decisions hinge on the presence of a symmetry, like whether some value is odd or even. In these cases, edit the node (e.g. a union) that you want to act conditionally - put some simple if/else logic inside and expose the Boolean value that controls it.
+
+  a#feature-requests.anchor
+  h3 Feature Requests
+  ul
+    li I really want the ability to define a node in terms of a graph of nodes. This is the number one feature! The code duplication that's occurring from the lack of this feature is nails-on-chalkboard level horrible, I physically cringe when I look at it, plus it's a huge cost for any non-trivially-sized project. I've heard from Neil that this is Matt's top-priority major feature currently under development, so look forward to its release!
+    li I would like to open multiple files in Antimony simultaneously. I would like to copy nodes from one file to another.
+    li I would like a CTRL-F "find" function to search for things with a given name. I would like the ability to rename a variable at every location it exists.
+    li I would like a way to add comments to the graph editor. For instance, perhaps I could tag nodes with text, and the annotation would appear above the node wherever it went. When I'm zoomed far out on the graph I'd like to see comments identifying what each graph region is doing. This composition of comments (only the more general comments appearing at more zoomed out levels, but seeing higher-density of comments as you zoom in) could play nicely once I can define node hierarchies through grouping them as functions.
+
+  a#bugs.anchor
+  h3 Bugs
+  ul
+    li Antimony crashes often, which can be a bit annoying. The irony, though, is that it's actually hard to lose more than a couple minute's work because I save every few minutes. Antimony crashes regularly enough to keep the value of saving often fresh in my mind.
+    li Antimony's inability to undo pasted nodes is quite annoying. It will undo node moves and deletes, which is good, except if I want to undo changes to a node that happened before I copied it, there is no way to be able to see that node as I undo changes to it because the copy was pasted right over it, and unrolling the undo stack to get to the changes I want to undo by necessity un-deletes the duplicate node, un-moves it away from the original, and then leaves it covering the original and obscuring any undoing that's applied to that node.
+    li Undoing a shape input wiring does not restore the previous input value in that node.
+    li Often when I try to alter the connections on a duplicated node it will connect to some seemingly random other node. When this happens, the only way to resolve it is to delete the copied node and build a replacement from scratch.
+
+  a#gallery.anchor
+  h3 Gallery
+  -
+    projectGalleries = [
+      ["computer-aided-design", [
+          "keyset-0-top.jpg",
+        ], [
+          "keyset-0-bottom.jpg",
+        ],
+        "keyset.sb",
+      ],
+      ["laser-cutter", [
+          "antimony-flexures.jpg",
+          "antimony-flex-joints.jpg",
+          "antimony-full-graph.jpg",
+          "flex-joints-done-cutting.jpg",
+        ], [
+          "flex-joints-construction-0.jpg",
+          "flex-joints-construction-1.jpg",
+        ],
+        "flexure-joints.sb",
+      ],
+      ["laser-cutter", [
+          "antimony-slotted-rings.jpg",
+        ], [
+        ],
+        "slotted-rings.sb",
+      ],
+      ["3d-printing", [
+          "antimony-revolved-raw-orthogonal.jpg",
+          "antimony-revolved-differencing-experiments.jpg",
+          "antimony-lofted-triangles.jpg",
+        ], [
+          "antimony-revolved-270-print-ready.jpg",
+          "revolved-fabricate-final.jpg",
+          "lofted-fabricate-top.jpg",
+        ],
+        "fabricate-word.sb",
+      ],
+      ["molding-and-casting", [
+          "dragon-top-mold.jpg",
+        ], [
+        ],
+        "dragon-linkage.sb",
+      ],
+    ]
+
+  .galleries
+    each projectGallery in projectGalleries
+      .gallery.clearfix
+        .gallery-left.w50p
+          each image in projectGallery[1]
+            a(href='#{basePath}#{projectGallery[0]}')
+              img(src='#{imgPathGlobal}#{projectGallery[0]}/#{image}')
+        .gallery-right.w50p
+          each image in projectGallery[2]
+            a(href='#{basePath}#{projectGallery[0]}')
+              img(src='#{imgPathGlobal}#{projectGallery[0]}/#{image}')
+      .image-caption
+        a(href='#{basePath}#{projectGallery[0]}/#{projectGallery[3]}')
+          | #{projectGallery[3]}

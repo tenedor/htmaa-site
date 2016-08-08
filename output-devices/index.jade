@@ -1,0 +1,33 @@
+extends ../jade/page.jade
+
+block basePath
+  -basePath = "../"
+
+block relativePath
+  -relativePath = "output-devices/"
+
+block content
+  h1 Output Devices
+  p I wanted to play with motors this week so I decided to make a toy car. I did not do so well - I failed to think through the design constraints of my system when choosing my motors. The plan was to put a stepper motor on each of the two back wheels and control and power the motors through a shared chip. The car itself would be a janky wooden frame constructed of small wooden slats. There would be a pair of free-spinning wheels on the front and the motors would be mounted on the back. Each motor axis would rigidly connect to its wheel. The chip would rest in the interior of the vehicle and an FTDI cable trailing from the chip would provide power and driving instructions.
+  p I picked a Jameco unipolor stepper motor we had in stock because its axle came with a star-shaped gear that would be easy to attach wheels to, and because it was relatively light. I should have thought about torque, though. The motor was barely strong enough to spin its own weight in the air, and it was no good for turning a toy car.
+  p I milled a test board from Neil to control the motor; each of the five unipolar leads received its own mosfet-mediated power line. I got the motor running and played with the controller code but ran out of time to do more. Here are some pictures:
+  .multi-image
+    .w145
+      img(src='#{imgPath}milled-board.jpg')
+    .w145
+      img(src='#{imgPath}components.jpg')
+    .w145
+      img(src='#{imgPath}filled-board-1.jpg')
+    .w145
+      img(src='#{imgPath}filled-board-2.jpg')
+  .multi-image
+    .w145
+      img(src='#{imgPath}measuring-holes.jpg')
+    .w145
+      img(src='#{imgPath}drilling.jpg')
+    .w145
+      img(src='#{imgPath}board-holes.jpg')
+    .w145
+      img(src='#{imgPath}driven-motor.jpg')
+
+  p In the #[a(href='../interface-programming') interface programming] week I designed and built a board that uses a mosfet to turn a laser pointer on and off. I also included a unipolar stepper control on that board (the motor is strong enough to turn a tiny laser diode, thankfully) and ran test code to check that it worked, but I never integrated motor and laser code together nor tried attaching the laser diode to the motor axle.

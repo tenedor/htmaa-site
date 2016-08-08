@@ -9,7 +9,8 @@ block relativePath
 block content
   h1 Circuit Design
   p As a first exploration towards building a keyset, I designed a simple board that would take continuous input from four buttons and control an RGB LED in response. This will let me figure out how long to buffer keypresses for to determine what keypress combinations a user considers one simultaneous input versus multiple discreet inputs, and it will let me build basic software infrastructure for mapping keypress combinations to values and outputting those values.
-  p I intended to mill the board into PCB and fill it but the mill was acting up, so I haven't gotten there yet. Here were my experiences designing the board, however.
+  p I learned a few nice things about Eagle, like setting the grid width smaller for more granular layouts and adding circles to mark IC orientations. I made some traces too close to be milled, so I had to go back and fix them.
+  p The design milled nicely and I filled the board. Soon I'll put software on it to test it. Here are some pictures:
   img(src='#{imgPath}eagle-schematic.jpg')
   img(src='#{imgPath}eagle-info.jpg')
   img(src='#{imgPath}eagle-grid-size.jpg')
@@ -21,3 +22,9 @@ block content
       img.squeeze-left(src='#{imgPath}outline.png')
   img(src='#{imgPath}insufficient-toolpath.jpg')
   img(src='#{imgPath}correct-toolpath.jpg')
+  .multi-image
+    .w50p
+      img.squeeze-right(src='#{imgPath}milled-board.jpg')
+    .w50p
+      img.squeeze-left(src='#{imgPath}filled-board.jpg')
+  p Here are the Eagle #[a(href='buttons.sch') schematic] and #[a(href='buttons.brd') board] for this design.

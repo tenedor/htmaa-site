@@ -7,5 +7,25 @@ block relativePath
   -relativePath = ""
 
 block content
+  -
+    pageImages = [
+      ["computer-aided-design", "keyset-0-top.jpg"],
+      ["laser-cutter", "flex-joints-construction-1.jpg"],
+      ["pcb-production", "finished-milling-1.jpg"],
+      ["3d-printing", "revolved-fabricate-final.jpg"],
+      ["shop-bot", "cutting-3.jpg"],
+      ["circuit-design", "eagle-schematic.jpg"],
+      ["molding-and-casting", "dragon-top-mold.jpg"],
+      ["embedded-programming", "button-press-1.jpg"],
+      ["output-devices", "driven-motor.jpg"],
+      ["input-devices", "filled-board.jpg"],
+      ["interface-programming", "laser-on.jpg"],
+      ["machine-making", "../../../../machine/files/Final%20End%20Effector%20System.jpg"],
+      ["laser-keyset", "all-buttons-pressed.jpg"],
+    ]
+
   h1 Home
-  p Hey there! Check out the #[a(href='laser-cutter') laser-cut cardboard construction kit] I've been making.
+  p Hey there! Check out the things I've been making.
+  each pageImage in pageImages
+    a(href='#{pageImage[0]}')
+      img.w50p(src='#{imgPathGlobal}#{pageImage[0]}/#{pageImage[1]}')
