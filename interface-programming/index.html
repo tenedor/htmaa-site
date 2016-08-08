@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="../lib/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <div id="navigation-bar">
+      <ul id="navigation-menu">
+        <li id="navigation-menu-home" class="navigation-menu"><a href="../">Home</a></li>
+        <li id="navigation-menu-projects" class="navigation-menu"><a href="#">Projects</a>
+          <ul id="projects-submenu">
+            <li class="projects-submenu"><a href="../computer-aided-design">Computer-Aided Design</a></li>
+            <li class="projects-submenu"><a href="../laser-cutter">Laser Cutter</a></li>
+            <li class="projects-submenu"><a href="../pcb-production">PCB Production</a></li>
+            <li class="projects-submenu"><a href="../3d-printing">3D Printing</a></li>
+            <li class="projects-submenu"><a href="../shop-bot">Shop Bot</a></li>
+            <li class="projects-submenu"><a href="../circuit-design">Circuit Design</a></li>
+            <li class="projects-submenu"><a href="../molding-and-casting">Molding and Casting</a></li>
+            <li class="projects-submenu"><a href="../embedded-programming">Embedded Programming</a></li>
+            <li class="projects-submenu"><a href="../output-devices">Output Devices</a></li>
+            <li class="projects-submenu"><a href="../input-devices">Input Devices</a></li>
+            <li class="projects-submenu"><a href="../interface-programming">Interface Programming</a></li>
+            <li class="projects-submenu"><a href="../machine-making">Machine Making</a></li>
+            <li class="projects-submenu"><a href="../laser-keyset">Laser Keyset</a></li>
+          </ul>
+        </li>
+        <li id="navigation-menu-about" class="navigation-menu"><a href="../about">About</a></li>
+        <li id="navigation-menu-mas863" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/">MAS.863</a></li>
+        <li id="navigation-menu-mas863-windham" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Windham/index.html">Original Site</a></li>
+      </ul>
+    </div>
+    <div id="navigation-bar-shadow"></div>
+    <div id="content">
+      <h1>Interface Programming</h1>
+      <p>This week I played with laser diodes. Our lab had a stock of 19566-LZ Mini Laser Head laser diodes from Marlin P. Jones & Assoc. Inc, a part with a one-page datasheet that is mostly pictures, so I began by characterizing its behavior. Hooking the laser diode to a power source, 30mA flowed at 3.1v and the device stayed cool. At 5v 75mA flowed and the diode started getting warm. At 8v 150mA flowed and the diode got too hot to hold in a few seconds; this also seems to have damaged the diode, because its brightness was permanently deteriorated after that. This is not surprising since it's rated for 3-5v; I wouldn't have tried it with an expensive part, but since the diode only costs $2 I indulged my curiosity.</p><img src="../img/interface-programming/testing-laser.jpg" class="w270">
+      <p>The laser was brightest at 3.6v (40mA). Shining the laser on a white wall from 5 meters away, the laser was first visible at 2.6v, first reasonably bright at 2.8v, and dim by 6v.</p>
+      <p>The second laser had the same current response as the first but the light intensity peaked at 4.5v. I didn't have a device for measuring light intensity so I can't quantify the response.</p>
+      <p>50mA at 4v seems like a nice safe region.</p>
+      <p>I hoped to make a board that could turn on and off a laser that was mounted on a stepper motor, and the board could step the motor to adjust the laser's target. I didn't get as far as the laser, but I got a simple round-trip serial communication between a laser-controlling board and a python app on my computer. I used Tkinter to make the python interface. Simple on/off buttons message the board to control the laser, and each time it receives an off command the board sends back a character that it increments once per send.</p>
+      <p>Here are pictures of my board, laptop interface, and the full system.</p>
+      <div class="multi-image">
+        <div class="w190"><img src="../img/interface-programming/traces.png"></div>
+        <div class="w190"><img src="../img/interface-programming/edited-board.jpg"></div>
+        <div class="w190"><img src="../img/interface-programming/filled-board.jpg"></div>
+      </div>
+      <div class="image-caption">I initially forgot to put resistors in series with the laser diode</div>
+      <div class="multi-image">
+        <div class="w50p"><img src="../img/interface-programming/laser-on.jpg"></div>
+        <div class="w50p"><img src="../img/interface-programming/laser-off.jpg"></div>
+      </div>
+      <p>If you're interested in the code, here are the <a href="ftdi-mosfets.44.py">python</a>, <a href="ftdi-mosfets.44.c">c</a>, and <a href="ftdi-mosfets.44.make">make</a> files</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+body {
+  background-color: #eee;
+  padding: 20px;
+}
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+a.underline {
+  text-decoration: underline;
+}
+a.anchor {
+  display: block;
+  position: relative;
+  top: -60px;
+  visibility: hidden;
+}
+h1,
+p {
+  color: #444;
+}
+img {
+  margin: 5px auto;
+  display: block;
+  max-width: 570px;
+}
+table {
+  margin: 15px 0px;
+}
+th,
+td {
+  padding: 0 10px;
+}
+hr {
+  border-top: 1px solid #bbb;
+}
+.text-highlight {
+  color: #090;
+}
+.clearfix:after {
+  content: " ";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+.w14p {
+  width: 14%;
+}
+.w33p {
+  width: 33%;
+}
+.w36p {
+  width: 36%;
+}
+.w50p {
+  width: 50%;
+}
+.w64p {
+  width: 64%;
+}
+.w145 {
+  width: 145px;
+}
+.w190 {
+  width: 190px;
+}
+.w255 {
+  width: 255px;
+}
+.w260 {
+  width: 260px;
+}
+.w270 {
+  width: 270px;
+}
+.w308 {
+  width: 308px;
+}
+.w330 {
+  width: 330px;
+}
+.mr10 {
+  margin-right: 10px;
+}
+#navigation-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  border-bottom: 1px #ddd solid;
+  background-color: #fff;
+  z-index: 10;
+}
+#navigation-bar a,
+#navigation-bar a:visited {
+  color: #999;
+}
+#navigation-bar a:hover {
+  color: #444;
+}
+#navigation-bar .navigation-menu {
+  position: relative;
+  float: left;
+  display: inline;
+  padding: 13px 5px;
+  vertical-align: baseline;
+}
+#navigation-bar .navigation-menu > a {
+  display: block;
+  position: relative;
+  padding: 2px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#navigation-bar .navigation-menu > a:hover {
+  padding-left: 5px;
+  border-left: 5px #ccc solid;
+}
+#navigation-bar .navigation-menu > ul {
+  display: none;
+}
+#navigation-bar .navigation-menu:hover > ul {
+  display: block;
+}
+#navigation-bar .navigation-menu ul#projects-submenu {
+  position: absolute;
+  left: 0px;
+  top: 48px;
+  width: 185px;
+  padding: 3px;
+  background-color: #fff;
+}
+#navigation-bar .navigation-menu ul#projects-submenu > li {
+  float: left;
+  position: relative;
+  display: inline;
+  width: 100%;
+  padding: 3px 0px;
+}
+#navigation-bar .navigation-menu ul#projects-submenu > li > a {
+  display: block;
+  position: relative;
+  padding: 2px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#navigation-bar .navigation-menu ul#projects-submenu > li > a:hover {
+  padding-left: 5px;
+  border-left: 5px #ccc solid;
+}
+#navigation-bar-shadow {
+  position: relative;
+  margin-bottom: 50px;
+}
+#content {
+  max-width: 600px;
+  min-width: 400px;
+  display: block;
+  margin: 0px auto;
+}
+.image-caption {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #999;
+}
+img.squeeze-left {
+  max-width: 100%;
+  float: left;
+}
+img.squeeze-right {
+  max-width: 100%;
+  float: right;
+}
+.multi-image:after {
+  content: " ";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+.multi-image > * {
+  position: relative;
+  float: left;
+}
+.multi-image img {
+  max-width: 100%;
+}
+.multi-image img.squeeze-left {
+  margin-left: 10px;
+}
+.multi-image img.squeeze-right {
+  margin-right: 10px;
+}
+.galleries > .gallery > * {
+  padding: 5px;
+  float: left;
+}
+.galleries > .gallery > * img {
+  width: 100%;
+}

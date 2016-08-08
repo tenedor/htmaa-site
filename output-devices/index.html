@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="../lib/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <div id="navigation-bar">
+      <ul id="navigation-menu">
+        <li id="navigation-menu-home" class="navigation-menu"><a href="../">Home</a></li>
+        <li id="navigation-menu-projects" class="navigation-menu"><a href="#">Projects</a>
+          <ul id="projects-submenu">
+            <li class="projects-submenu"><a href="../computer-aided-design">Computer-Aided Design</a></li>
+            <li class="projects-submenu"><a href="../laser-cutter">Laser Cutter</a></li>
+            <li class="projects-submenu"><a href="../pcb-production">PCB Production</a></li>
+            <li class="projects-submenu"><a href="../3d-printing">3D Printing</a></li>
+            <li class="projects-submenu"><a href="../shop-bot">Shop Bot</a></li>
+            <li class="projects-submenu"><a href="../circuit-design">Circuit Design</a></li>
+            <li class="projects-submenu"><a href="../molding-and-casting">Molding and Casting</a></li>
+            <li class="projects-submenu"><a href="../embedded-programming">Embedded Programming</a></li>
+            <li class="projects-submenu"><a href="../output-devices">Output Devices</a></li>
+            <li class="projects-submenu"><a href="../input-devices">Input Devices</a></li>
+            <li class="projects-submenu"><a href="../interface-programming">Interface Programming</a></li>
+            <li class="projects-submenu"><a href="../machine-making">Machine Making</a></li>
+            <li class="projects-submenu"><a href="../laser-keyset">Laser Keyset</a></li>
+          </ul>
+        </li>
+        <li id="navigation-menu-about" class="navigation-menu"><a href="../about">About</a></li>
+        <li id="navigation-menu-mas863" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/">MAS.863</a></li>
+        <li id="navigation-menu-mas863-windham" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Windham/index.html">Original Site</a></li>
+      </ul>
+    </div>
+    <div id="navigation-bar-shadow"></div>
+    <div id="content">
+      <h1>Output Devices</h1>
+      <p>I wanted to play with motors this week so I decided to make a toy car. I did not do so well - I failed to think through the design constraints of my system when choosing my motors. The plan was to put a stepper motor on each of the two back wheels and control and power the motors through a shared chip. The car itself would be a janky wooden frame constructed of small wooden slats. There would be a pair of free-spinning wheels on the front and the motors would be mounted on the back. Each motor axis would rigidly connect to its wheel. The chip would rest in the interior of the vehicle and an FTDI cable trailing from the chip would provide power and driving instructions.</p>
+      <p>I picked a Jameco unipolor stepper motor we had in stock because its axle came with a star-shaped gear that would be easy to attach wheels to, and because it was relatively light. I should have thought about torque, though. The motor was barely strong enough to spin its own weight in the air, and it was no good for turning a toy car.</p>
+      <p>I milled a test board from Neil to control the motor; each of the five unipolar leads received its own mosfet-mediated power line. I got the motor running and played with the controller code but ran out of time to do more. Here are some pictures:</p>
+      <div class="multi-image">
+        <div class="w145"><img src="../img/output-devices/milled-board.jpg"></div>
+        <div class="w145"><img src="../img/output-devices/components.jpg"></div>
+        <div class="w145"><img src="../img/output-devices/filled-board-1.jpg"></div>
+        <div class="w145"><img src="../img/output-devices/filled-board-2.jpg"></div>
+      </div>
+      <div class="multi-image">
+        <div class="w145"><img src="../img/output-devices/measuring-holes.jpg"></div>
+        <div class="w145"><img src="../img/output-devices/drilling.jpg"></div>
+        <div class="w145"><img src="../img/output-devices/board-holes.jpg"></div>
+        <div class="w145"><img src="../img/output-devices/driven-motor.jpg"></div>
+      </div>
+      <p>In the <a href="../interface-programming">interface programming</a> week I designed and built a board that uses a mosfet to turn a laser pointer on and off. I also included a unipolar stepper control on that board (the motor is strong enough to turn a tiny laser diode, thankfully) and ran test code to check that it worked, but I never integrated motor and laser code together nor tried attaching the laser diode to the motor axle.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="../lib/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <div id="navigation-bar">
+      <ul id="navigation-menu">
+        <li id="navigation-menu-home" class="navigation-menu"><a href="../">Home</a></li>
+        <li id="navigation-menu-projects" class="navigation-menu"><a href="#">Projects</a>
+          <ul id="projects-submenu">
+            <li class="projects-submenu"><a href="../computer-aided-design">Computer-Aided Design</a></li>
+            <li class="projects-submenu"><a href="../laser-cutter">Laser Cutter</a></li>
+            <li class="projects-submenu"><a href="../pcb-production">PCB Production</a></li>
+            <li class="projects-submenu"><a href="../3d-printing">3D Printing</a></li>
+            <li class="projects-submenu"><a href="../shop-bot">Shop Bot</a></li>
+            <li class="projects-submenu"><a href="../circuit-design">Circuit Design</a></li>
+            <li class="projects-submenu"><a href="../molding-and-casting">Molding and Casting</a></li>
+            <li class="projects-submenu"><a href="../embedded-programming">Embedded Programming</a></li>
+            <li class="projects-submenu"><a href="../output-devices">Output Devices</a></li>
+            <li class="projects-submenu"><a href="../input-devices">Input Devices</a></li>
+            <li class="projects-submenu"><a href="../interface-programming">Interface Programming</a></li>
+            <li class="projects-submenu"><a href="../machine-making">Machine Making</a></li>
+            <li class="projects-submenu"><a href="../laser-keyset">Laser Keyset</a></li>
+          </ul>
+        </li>
+        <li id="navigation-menu-about" class="navigation-menu"><a href="../about">About</a></li>
+        <li id="navigation-menu-mas863" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/">MAS.863</a></li>
+        <li id="navigation-menu-mas863-windham" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Windham/index.html">Original Site</a></li>
+      </ul>
+    </div>
+    <div id="navigation-bar-shadow"></div>
+    <div id="content">
+      <h1>Computer-Aided Design</h1>
+      <p>Doug Engelbart is popularly known for inventing the computer mouse. (He should be popularly known for founding a discipline of augmenting humans' capacities to solve complex problems, but that's its own topic.) He didn't think a mouse should be used in isolation, though; he invented a one-handed keyboard for use by the off-hand during mouse manipulations. This "keyset" had five keys, one per finger, and combining simultaneous key presses produced 31 unique output values - enough for A-Z and five non-alpha characters. Commands from the keyset would be directed by the mouse's pointing.</p>
+      <p>After Engelbart's inventions of them at SRI in the 60s, the mouse and keyset traveled to Xerox PARC for the 70s and were picked up by Steve Jobs in 1979. Jobs commercialized the mouse and correctly dismissed the keyset as too complicated for the consumer audience he was about to introduce to graphical UIs. Apple GUIs encoded the design assumption that a user manipulating a mouse wasn't doing anything else at the same time. The 1984 Macintosh computer launched the mouse to fame and this design assumption along with it and the keyset never made it beyond historical footnote-dom.</p>
+      <p>Which it probably never should have. A user's keyboard can already be used as a keyset with the appropriate software, and touch detection on track pads could disambiguate keypresses signifying distinct keyboard inputs from those signifying keyset commands.</p>
+      <p>As we transition from the personal computer to ubiquitous computing and wearables, though, one-handed character input is interesting for new reasons. There's no longer an assumption of a two-handed keyboard at the human-computer interface, and there's no longer a constraint of sitting at a desk in a fixed orientation.</p>
+      <p>Anyway, I don't expect it to go anywhere grand, but I'd like to take the keyset for a spin. In particular, I think I'll play with incorporating five finger-buttons into a device with a laser pointer, optical mouse sensor, and wireless communication chip. The device can rest on a table as a mouse or be used for in-air gesturing with the laser. It's a clunky mashup of ideas to jam together but should be fun to design and play with.</p>
+      <p>I started playing with a CAD tool called Antimony to mock up a design but didn't get too far. For one, my computer's hard drive cable broke only a few hours into the project and I've been working on other things since. But I've also concluded Antimony is the wrong tool for the job. Antimony uses a 3D-solids functional representation of objects and constructs complexity by applying transformations to existing objects. The starting objects are a small set of geometrically regular 2D and 3D primitives. This makes it difficult to create biologically-inspired forms with high amounts of non-symmetric complexity and nuance. Tools that offer interpolation on 1D curves and control point manipulation are better suited to the task. When I get back to this project I think I'll try playing with Rhino.</p>
+      <p>Anyway, here are screenshots of where I got in Antimony.</p>
+      <p>I first made a simple test object. I intersected a cube and sphere and subtracted some cylinders from inside. I colored the result red. Antimony lets you export designs to a mesh (.stl) or a heightmap (.png). Initially trying to export as a heightmap would crash Antimony, but I worked with Antimony's creator Matt Keeter and we got this fixed.</p><img src="../img/computer-aided-design/antimony-experiment.png">
+      <div class="image-caption">the left shape is the middle shape minus the right shape</div><img src="../img/computer-aided-design/experiment-heightmap.png">
+      <div class="image-caption">exported heightmaps of the shapes above</div>
+      <p>I then set about making the augmented keyset. A typical mouse design assumes only the first two fingers are used to press keys, and the other two fingers and sometimes the thumb are rendered inactive. A larger object is useful when each finger needs to be active. Using my own hand and a physical object (a voltmeter) as a keyset model, I began designing in Antimony a simple hand in concert with the augmented keyset so that I could subtract finger depressions from the keyset block and otherwise sculpt the block to match the hand. This was very slow going though - one big mistake was I didn't use an intermediate representation between my real-world model and my digital model, and tweaking the positions and rotations of Antimony elements was a slow way to design. I should have taken a list of measurements of my hand's positions and dimensions and then transferred these into Antimony all at once. But here's what I'd built before my hard drive cable curtailed further work.</p>
+      <div class="multi-image">
+        <div class="w50p"><img src="../img/computer-aided-design/keyset-0-top.jpg" class="squeeze-right"><img src="../img/computer-aided-design/keyset-0-bottom.jpg" class="squeeze-right"></div>
+        <div class="w50p"><img src="../img/computer-aided-design/keyset-0-front.jpg" class="squeeze-left"><img src="../img/computer-aided-design/keyset-0-back-angle.jpg" class="squeeze-left"></div>
+      </div>
+      <div class="image-caption">small steps towards modeling a hand holding a keyset</div>
+      <p>Here are the Antimony files for the <a href="test-object.sb">test object</a> and <a href="keyset.sb">keyset</a>.</p>
+      <p>I've worked with Antimony quite a lot since this modeling work and quite like it. In particular, I documented <a href="../laser-cutter">my Antimony workflow for a laser-cut cardboard project</a>, and I wrote up some <a href="../thoughts-on-antimony/">general thoughts on Antimony</a>.</p>
+    </div>
+  </body>
+</html>

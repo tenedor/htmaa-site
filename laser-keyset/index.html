@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="../lib/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <div id="navigation-bar">
+      <ul id="navigation-menu">
+        <li id="navigation-menu-home" class="navigation-menu"><a href="../">Home</a></li>
+        <li id="navigation-menu-projects" class="navigation-menu"><a href="#">Projects</a>
+          <ul id="projects-submenu">
+            <li class="projects-submenu"><a href="../computer-aided-design">Computer-Aided Design</a></li>
+            <li class="projects-submenu"><a href="../laser-cutter">Laser Cutter</a></li>
+            <li class="projects-submenu"><a href="../pcb-production">PCB Production</a></li>
+            <li class="projects-submenu"><a href="../3d-printing">3D Printing</a></li>
+            <li class="projects-submenu"><a href="../shop-bot">Shop Bot</a></li>
+            <li class="projects-submenu"><a href="../circuit-design">Circuit Design</a></li>
+            <li class="projects-submenu"><a href="../molding-and-casting">Molding and Casting</a></li>
+            <li class="projects-submenu"><a href="../embedded-programming">Embedded Programming</a></li>
+            <li class="projects-submenu"><a href="../output-devices">Output Devices</a></li>
+            <li class="projects-submenu"><a href="../input-devices">Input Devices</a></li>
+            <li class="projects-submenu"><a href="../interface-programming">Interface Programming</a></li>
+            <li class="projects-submenu"><a href="../machine-making">Machine Making</a></li>
+            <li class="projects-submenu"><a href="../laser-keyset">Laser Keyset</a></li>
+          </ul>
+        </li>
+        <li id="navigation-menu-about" class="navigation-menu"><a href="../about">About</a></li>
+        <li id="navigation-menu-mas863" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/">MAS.863</a></li>
+        <li id="navigation-menu-mas863-windham" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Windham/index.html">Original Site</a></li>
+      </ul>
+    </div>
+    <div id="navigation-bar-shadow"></div>
+    <div id="content">
+      <h1>Laser Keyset</h1>
+      <p>For my final project, I returned to my idea from week 1 of merging a keyset with a pointing device. I made a hand-held laser-pointer that incorporates three data buttons in addition to the laser on/off button. It interfaces to a computer over a wired connection (FTDI serial) - the next iteration will be wireless.</p>
+      <p>The key challenge turned out to be making everything compact. I had a strong sense from the beginning of the proper handle size, no more than 1 inch, and I wanted the wires and electronics nicely sealed inside.</p>
+      <p>My first step was in software though. I spent longer than I'd like to admit getting serial communication running round-trip between my ATtiny44 and a python script on my computer. I kept mixing up Tx and Rx, for one. I got it going eventually though.</p>
+      <p>The next challenge was fitting a shell tightly onto the laser diode. I printed about a dozen small half-shells to work out the best dimensions for gripping the thin ridge in the diode to hold it in place.</p>
+      <p>I generalized the diode shell into a larger handle, first printing a half-length handle to test a few concepts. At the faster print rate I wanted to use for the handle, the diode shell had too little resolution to function, so instead of baking the shell straight into the handle halves I made handle depressions that would accept diode shell inserts.</p>
+      <p>For the keyset buttons, I built a sideways extension that was comfortable to rest one's fingers on. The extension was made from a wooden dowel into which I hand-drilled a 45-degree cylindrical hole to fit the shape of the primary handle. I placed a button on the extension handle for fingers three, four, and five.</p>
+      <p>I had planned to attach an FTDI cable straight to the board and run it out the base of the handle, but I measured the wrong cable radius and ended up with too little space to fit the cable. I ran a ribbon cable extension out the bottom instead, which turned out to be a lucky call - I later ended up gluing the shell together (not something I'd originally planned), and this way I can quickly plug and unplug from the long and heavy FTDI cable.</p>
+      <p>Many of my wires ended up being soldered directly onto copper pads on my board. The external buttons were soldered onto copper tape that I'd run around the exteriors of the handles. In both cases, I'd test with a multimeter that an electrical connection had been made, then I'd hot-glue over the wire join to hold it in place. Getting the electrical connection sometimes took multiple tries, especially for the buttons - the copper tape didn't stay down very well, and the rounded surface was difficult to join to the legless buttons.</p>
+      <p>I ran end-to-end tests of each component - the four input buttons and the laser diode and serial outputs - and each part worked. This was great news!</p>
+      <p>Fitting the various pieces together was a bit jammed since I'd kept the tolerances tight to keep total size down, but I got things together. I tested each component again with everything packaged up to confirm it worked, then glued the wooden handle in place and sealed everything in. It continues to work.</p>
+      <p>Here are various pictures:</p>
+      <div class="multi-image">
+        <div class="w145"><img src="../img/laser-keyset/laser-harness-test.jpg"></div>
+        <div class="w145"><img src="../img/laser-keyset/handle-test.jpg"></div>
+        <div class="w145"><img src="../img/laser-keyset/milled-board.jpg"></div>
+        <div class="w145"><img src="../img/laser-keyset/filled-board.jpg"></div>
+      </div>
+      <div class="multi-image">
+        <div class="w145"><img src="../img/laser-keyset/wood-handle-drilled.jpg"></div>
+        <div class="w145"><img src="../img/laser-keyset/wood-handle-traces-1.jpg"></div>
+        <div class="w145"><img src="../img/laser-keyset/wood-handle-traces-3.jpg"></div>
+        <div class="w145"><img src="../img/laser-keyset/wood-handle-traces-4.jpg"></div>
+      </div><img src="../img/laser-keyset/wood-handle-buttons.jpg"><img src="../img/laser-keyset/antimony-handle.jpg"><img src="../img/laser-keyset/ftdi-wired.jpg"><img src="../img/laser-keyset/assembled-electronics-components.jpg">
+      <div class="multi-image">
+        <div class="w33p"><img src="../img/laser-keyset/end-to-end-testing-1.jpg"></div>
+        <div class="w33p"><img src="../img/laser-keyset/end-to-end-testing-2.jpg"></div>
+        <div class="w33p"><img src="../img/laser-keyset/end-to-end-testing-3.jpg"></div>
+      </div><img src="../img/laser-keyset/all-buttons-pressed.jpg">
+      <p>If you're interested in the code, here are the <a href="laser-pointer.44.py">python</a>, <a href="laser-pointer.44.c">c</a>, and <a href="laser-pointer.44.make">make</a> files. Here is the <a href="laser-pointer.sb">Antimony</a> CAD file.</p>
+    </div>
+  </body>
+</html>

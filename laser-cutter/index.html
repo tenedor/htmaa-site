@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="../lib/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <div id="navigation-bar">
+      <ul id="navigation-menu">
+        <li id="navigation-menu-home" class="navigation-menu"><a href="../">Home</a></li>
+        <li id="navigation-menu-projects" class="navigation-menu"><a href="#">Projects</a>
+          <ul id="projects-submenu">
+            <li class="projects-submenu"><a href="../computer-aided-design">Computer-Aided Design</a></li>
+            <li class="projects-submenu"><a href="../laser-cutter">Laser Cutter</a></li>
+            <li class="projects-submenu"><a href="../pcb-production">PCB Production</a></li>
+            <li class="projects-submenu"><a href="../3d-printing">3D Printing</a></li>
+            <li class="projects-submenu"><a href="../shop-bot">Shop Bot</a></li>
+            <li class="projects-submenu"><a href="../circuit-design">Circuit Design</a></li>
+            <li class="projects-submenu"><a href="../molding-and-casting">Molding and Casting</a></li>
+            <li class="projects-submenu"><a href="../embedded-programming">Embedded Programming</a></li>
+            <li class="projects-submenu"><a href="../output-devices">Output Devices</a></li>
+            <li class="projects-submenu"><a href="../input-devices">Input Devices</a></li>
+            <li class="projects-submenu"><a href="../interface-programming">Interface Programming</a></li>
+            <li class="projects-submenu"><a href="../machine-making">Machine Making</a></li>
+            <li class="projects-submenu"><a href="../laser-keyset">Laser Keyset</a></li>
+          </ul>
+        </li>
+        <li id="navigation-menu-about" class="navigation-menu"><a href="../about">About</a></li>
+        <li id="navigation-menu-mas863" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/">MAS.863</a></li>
+        <li id="navigation-menu-mas863-windham" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Windham/index.html">Original Site</a></li>
+      </ul>
+    </div>
+    <div id="navigation-bar-shadow"></div>
+    <div id="content">
+      <h1>Laser Cutter</h1>
+      <p>This week I used a laser cutter to build a general-purpose cardboard construction set. I built 3D models in Antimony, exported them as PNGs, and laid them out in CorelDRAW for sending to the laser. Here's something I built with my construction set.</p><img src="../img/laser-cutter/flex-joints-construction-0.jpg" width="470px">
+      <div class="image-caption">flexible construction pieces</div>
+      <p>To do this, I started with some code Neil wrote specifying square building blocks with various joint types. It generated this output:</p>
+      <p>Neil's code was designed without a larger system in mind, so many components were hardcoded and not easy to reuse. I refactored his code to decouple each joint from whatever it formed a joint in. Joints get built at position a0 and get stored in a ShapeList node called slots. Then anyone who wants one can access it with slots.shape2 (or whatever its list index is), moving its origin to the desired point p by translating by p-a0.</p>
+      <p>Having modularized the joint definitions, it was time to test the sizing parameters and get something into cardboard. First I wanted to know how wide the joints should be. I made five copies of the simple rectangle slot and gave each one a slightly different width. Widths centered on 0.167", the width of the cardboard (measured by caliper). Then I inserted the joints into a wide rectangle. I cut two copies with the laser (I'll explain this process in a second) and found that for the laser-cardboard combination I was using, 0.157" forms a snug fit. Values +/-0.01" from this were too loose or couldn't be assembled. I could always go back later to test finer refinements to the width, but this was good enough for now.</p>
+      <p>Now I wanted to try Neil's five different joints. Using the same pattern, I put one joint each into a rectangular strip and printed two copies. This constituted the most general case of cutting on the laser cutter because it had internal cuts, not just an outline, so let me now explain the process of getting my Antimony file into the laser cutter.</p>
+      <p>First, whatever 2D Antimony shape I want to cut gets extruded into 3D. Exporting this as a heightmap generates a corresponding black and white image. I open a new CorelDRAW file with the laser cutter's dimensions (32"x18" for this one). Dragging the PNG into CorelDRAW preserves the image size, but the white-on-black 2D shape needs to be converted to a 1D outline.</p>
+      <p>Select Trace Bitmap > Outline Trace > High Quality Image. By default this traces the shape outline and ignores internal holes. Therefore, select Specify Color and choose the color black. Set smoothing to zero and check "Remove color from entire image". Hit Ok. Set the trace width to Hairline and delete the original PNG. Do this for each image you want to cut, duplicate traces you want multiple copies of, and arrange your traces in the layout you'd like to have them cut in. Print the image, and in Preferences make sure the color black is selected and is set to VECT and MANUAL. I found that the laser settings 100% power, 8% speed and 400 ppi worked well for cuts; 6% and 500 ppi also worked but singed the cardboard more than necessary and was slower. Applying these settings and clicking print sends them to the laser cutter.</p><img src="../img/laser-cutter/coreldraw-summary.jpg">
+      <div class="image-caption">steps for handling bit-mapped laser cut schemas with CorelDRAW</div>
+      <p>Make sure the laser cutter is turned on, and switch on the exhaust and the hood. Check that the laser head is set to the right height. (There's a dongle with a notch in it that describes how high the laser bracket should be above the material surface; to adjust the head, press Z, then use the up and down keys in combination with the select key for selecting precision.) Position a piece of cardboard in the cutting bed, tape down the edges for stability, and close the lid. You have to nudge the lid a bit for the machine to detect that it's closed. At this point, turn on the tank of inert gas and hit select to start cutting.</p>
+      <p>When it's done, turn off the gas. Open the laser cutter lid and let it air out a bit, then remove your pieces and throw out any cardboard scraps. (You don't want to leave an uneven surface for the next person.) One tip for pulling out your pieces is to lift them out with masking tape.</p>
+      <p>This was supposed to let me test the five joint types, but the first cut was a flop - I'd determined the slot width should be 0.157", but then I set it to 0.1". Whoops. So I did a second cut. The triangular mouthed slot made them easier to fit together, but the mouth was way wider than necessary (100% gain over the slot width). I parameterized its width in my var list and reduced it to 50% gain. The other three joints were dysfunctional. For now I put that concern aside - it might be fun to return to, but I have a good enough joint in the triangular-mouthed slot.</p>
+      <p>Now I wanted construction pieces other than squares. I started with regular polygons with n sides. An n-gon can be made from n identical triangles with a shared center pieced together like pizza slices. (Draw a line from each vertex to the center; these divide it into identical isosceles triangles.) The inner angle of each triangle is 2 pi / n, so for a fixed side width the shortest radius to the edge is width / 2 tan(pi / n). The radius to a corner is width / 2 sin(pi / n). So I added numSides as an input in my var list and calculated radiusToEdge and radiusToCorner as two other vars. I set numSides to 4 for starters so I could compare my refactoring progress to Neil's original square tiles. This helped me catch multiple mistakes. I changed the slot rectangle's starting x position from -var.width/2 to -radiusToEdge and made similar substitutions in the other joints. I built a triangle in terms of numSides and removed the slot from it, the first quarter of a square tile. Varying n varies the slotted triangle correctly. Multiplying the triangles with Atimony's polar array completes the polygon. Swapping the joint type for more advanced slots works as it should.</p><img src="../img/laser-cutter/antimony-ngon-slotted-triangles.jpg">
+      <div class="image-caption">slotted triangles for n = 3, 4, 5, 6, 10</div><img src="../img/laser-cutter/antimony-ngons.jpg">
+      <div class="image-caption">and the corresponding polygons</div><img src="../img/laser-cutter/cardboard-polygons.jpg">
+      <div class="image-caption">all edge sizes are 1.5"</div><img src="../img/laser-cutter/polygons-construction.jpg">
+      <div class="image-caption">the joints are strong enough for constructions to stand up</div>
+      <p>Up to this point all my building blocks were rigid, and I wanted my kit to have flexible components as well. Or, well, mostly I just wanted to try making flexures, and this was a good excuse. I built the base flexure unit out of rectangles and used Antimony's 2D array to tessellate it n times lengthwise.</p><img src="../img/laser-cutter/antimony-flexures.jpg">
+      <div class="image-caption">flexures with gapWidth at 0.1" and with beamWidth at 0.1" and 0.01"</div>
+      <p>When I cut the flexures, little flames kept showing up each time the laser went over a slit a second time. I figured this was due to going over it twice (no way to make 1D lines in Antimony, so the slits are thin rectangles), but then my friend Nils pointed out that I didn't have the nitrogen gas turned on. Whoops! So if you see flames, check that you turned on the gas. (Unless the flames are dangerously big, of course - then you should immediately turn off the laser cutter!)</p>
+      <p>The flexures came out nicely. I'd done 0.01" slits and tried beam widths of 0.06, 0.08, 0.10, 0.12, and 0.14. (The laser's kerf meant that the actual gaps were larger and the beams smaller than these numbers: the 0.06" beams were actually 0.045" with 0.025" gaps.) They all had 1.5" heights, same as the construction blocks, and I gave each piece six flexure cycles. Cutting them took 3.5 minutes. For each piece I measured its maximum curvature out-of-plane, the maximum arc-length (a curvature proxy) in-plane, and, as best I could, the maximum axial twisting.</p>
+      <div class="multi-image">
+        <div class="w50p"><img src="../img/laser-cutter/flexure-arc-length.jpg" class="squeeze-right"></div>
+        <div class="w50p"><img src="../img/laser-cutter/flexure-axial-twisting.jpg" class="squeeze-left"></div>
+      </div>
+      <div class="image-caption">measurements of in-plane arc length (left) and axial twisting (right)<br>for a flexure with beam width 0.02" and gap width 0.01"</div>
+      <table>
+        <tr>
+          <th>beam width</th>
+          <th>0.06</th>
+          <th>0.08</th>
+          <th>0.10</th>
+          <th>0.12</th>
+          <th>0.14</th>
+          <th>err</th>
+          <td>(inches, pre-kerf)</td>
+        </tr>
+        <tr>
+          <th>out-of-plane</th>
+          <td>0.5</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>5.5</td>
+          <td>0.125</td>
+          <td>(arc radius in inches)</td>
+        </tr>
+        <tr>
+          <th>in-plane</th>
+          <td>10</td>
+          <td>5</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>20%</td>
+          <td>(arc length in degrees)</td>
+        </tr>
+        <tr>
+          <th>axial twisting</th>
+          <td>10</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>10</td>
+          <td>(arc length in degrees)</td>
+        </tr>
+      </table>
+      <p>The limitation on in-plane deformation comes from the beams running into each other at the compressed end, so increasing the gap width makes them bend farther. I tried a few more versions:</p>
+      <p><b>more sizes with gap width fixed at 0.01"</b></p>
+      <table>
+        <tr>
+          <th>beam width</th>
+          <th>0.02</th>
+          <th>0.03</th>
+          <th>0.07</th>
+          <th>err</th>
+          <td>(inches, pre-kerf)</td>
+        </tr>
+        <tr>
+          <th>out-of-plane</th>
+          <td>3/16</td>
+          <td>3/8</td>
+          <td>0.75</td>
+          <td>0.125</td>
+          <td>(arc radius in inches)</td>
+        </tr>
+        <tr>
+          <th>in-plane</th>
+          <td>45</td>
+          <td>20</td>
+          <td>12</td>
+          <td>20%</td>
+          <td>(arc length in degrees)</td>
+        </tr>
+        <tr>
+          <th>axial twisting</th>
+          <td>30</td>
+          <td>15</td>
+          <td>-</td>
+          <td>10</td>
+          <td>(arc length in degrees)</td>
+        </tr>
+      </table>
+      <p><b>keeping beam width fixed at 0.06"</b></p>
+      <table>
+        <tr>
+          <th>beam width</th>
+          <th>0.02</th>
+          <th>0.03</th>
+          <th>0.04</th>
+          <th>0.05</th>
+          <th>err</th>
+          <td>(inches, pre-kerf)</td>
+        </tr>
+        <tr>
+          <th>out-of-plane</th>
+          <td>3/8</td>
+          <td>3/8</td>
+          <td>0.25</td>
+          <td>0.125</td>
+          <td>0.125</td>
+          <td>(arc radius in inches)</td>
+        </tr>
+        <tr>
+          <th>in-plane</th>
+          <td>15</td>
+          <td>17</td>
+          <td>18</td>
+          <td>20</td>
+          <td>20%</td>
+          <td>(arc length in degrees)</td>
+        </tr>
+        <tr>
+          <th>axial twisting</th>
+          <td>15</td>
+          <td>20</td>
+          <td>25</td>
+          <td>30</td>
+          <td>10</td>
+          <td>(arc length in degrees)</td>
+        </tr>
+      </table>
+      <p>Generally, I'm pretty happy with beam widths 0.05 and 0.06 sizes using gaps at 0.01.</p>
+      <p>Time to incorporate these into construction blocks! I made flexible connectors with two types of end effectors, one square-aligned and the other circular. The circular ends have the advantage of allowing joints at arbitrary angles, though I stuck with 8-gon angles for these cuts since that seems satisfactorily general. While I was at it, I made some rigid circle pieces, too, one for each of n = {3, 4, 5, 6, 7, 8, 10} joints.</p><img src="../img/laser-cutter/antimony-flex-joints.jpg">
+      <div class="image-caption">flexible construction pieces</div><img src="../img/laser-cutter/antimony-full-graph.jpg">
+      <div class="image-caption">full Antimony graph</div><img src="../img/laser-cutter/flex-joints-done-cutting.jpg">
+      <div class="image-caption">laser-cut flexure and circle press-fit pieces</div><img src="../img/laser-cutter/flex-joints-construction-1.jpg">
+      <div class="image-caption">constructions with flexible pieces</div>
+      <p>There's more I'd like to do, but I'm out of time for now. If you'd like, here's my <a href="flexure-joints.sb">Antimony script for these components</a>. I've also written up some <a href="../thoughts-on-antimony">Antimony tips</a> from my experiences so far, and I've posted the code for an as-yet-undocumented <a href="slotted-rings.sb">Antimony reproduction</a> of <a href="http://fab.cba.mit.edu/classes/863.14/people/dan_chen/computer-controlled-cutting-laser-cutter/" target="_blank">Dan Chen's Interlocking Circle pressfits</a>.</p>
+    </div>
+  </body>
+</html>

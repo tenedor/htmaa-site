@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="../lib/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <div id="navigation-bar">
+      <ul id="navigation-menu">
+        <li id="navigation-menu-home" class="navigation-menu"><a href="../">Home</a></li>
+        <li id="navigation-menu-projects" class="navigation-menu"><a href="#">Projects</a>
+          <ul id="projects-submenu">
+            <li class="projects-submenu"><a href="../computer-aided-design">Computer-Aided Design</a></li>
+            <li class="projects-submenu"><a href="../laser-cutter">Laser Cutter</a></li>
+            <li class="projects-submenu"><a href="../pcb-production">PCB Production</a></li>
+            <li class="projects-submenu"><a href="../3d-printing">3D Printing</a></li>
+            <li class="projects-submenu"><a href="../shop-bot">Shop Bot</a></li>
+            <li class="projects-submenu"><a href="../circuit-design">Circuit Design</a></li>
+            <li class="projects-submenu"><a href="../molding-and-casting">Molding and Casting</a></li>
+            <li class="projects-submenu"><a href="../embedded-programming">Embedded Programming</a></li>
+            <li class="projects-submenu"><a href="../output-devices">Output Devices</a></li>
+            <li class="projects-submenu"><a href="../input-devices">Input Devices</a></li>
+            <li class="projects-submenu"><a href="../interface-programming">Interface Programming</a></li>
+            <li class="projects-submenu"><a href="../machine-making">Machine Making</a></li>
+            <li class="projects-submenu"><a href="../laser-keyset">Laser Keyset</a></li>
+          </ul>
+        </li>
+        <li id="navigation-menu-about" class="navigation-menu"><a href="../about">About</a></li>
+        <li id="navigation-menu-mas863" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/">MAS.863</a></li>
+        <li id="navigation-menu-mas863-windham" class="navigation-menu"><a href="http://fab.cba.mit.edu/classes/863.15/section.Harvard/people/Windham/index.html">Original Site</a></li>
+      </ul>
+    </div>
+    <div id="navigation-bar-shadow"></div>
+    <div id="content">
+      <h1>PCB Production</h1>
+      <p>This week I made a working circuit board out of a design for a programmer chip. I milled the board, soldered components onto it, and programmed it. Here was the result:</p><img src="../img/pcb-production/finished-board.jpg">
+      <p>I started from an existing board schema. I cut the design into PCB using a Roland Modela mill. To do this, I first wiped down my PCB with alcohol, and similarly cleaned the surface of the sacrificial layer mounted in the mill bed. I affixed the board onto this bed with double-sided tape.</p>
+      <div class="multi-image">
+        <div class="w50p"><img src="../img/pcb-production/board-traces.png" class="squeeze-right"></div>
+        <div class="w50p"><img src="../img/pcb-production/board-outline.png" class="squeeze-left"></div>
+      </div>
+      <p>Next was to set up the mill. I checked that the computer next to the mill was set up to talk to the mill, then using the fabmodules interface I loaded the standard settings into the mill. I input the PNG trace image I had and selected Roland mill trace cutting as my output. To calibrate the mill, I first raised the drill bit (a 1/64" bit) up high for safety, then used fabmodules to give the mill an offset to the starting edge on my board. Once the drill bit's x and y coordinates were in place, I lowered the bit to the surface of my board and tightened the screws. Make sure to hold the bit down against the board while tightening the screws so it doesn't slip off the surface, and make sure to tighten the screws really well! (On the Roland, there are two screws on the drill bit - first tighten both screws lightly, then go back and tighten each firmly.) The first few times I tried to mill my board it stopped cutting traces deeply enough after about twenty seconds. I had to tighten the screws really hard before it cut correctly.</p>
+      <p>Once that's set up, I checked that the fabmodules settings matched my setup (0.1mm cut depth for me, 1/64" drill bit, 4 drill offsets of material to remove) and told it to calculate the drill path. It generated an image with thin black lines marking the drill cuts and red lines showing the drill hopping to a new location. This looked right so I sent it to the mill.</p>
+      <div class="multi-image">
+        <div class="w36p"><img src="../img/pcb-production/milling-front.jpg" class="squeeze-right"></div>
+        <div class="w64p"><img src="../img/pcb-production/milling-top.jpg" class="squeeze-left"></div>
+      </div>
+      <p>The milling can be paused or canceled from a progress window that opens up on the computer. When I'd seen my early boards not getting cut deeply enough, I canceled the cut and started over. Eventually I figured out my mistake and cut the board successfully, which took about fifteen minutes.</p>
+      <div class="multi-image">
+        <div class="w36p"><img src="../img/pcb-production/poorly-milled.jpg" class="squeeze-right"></div>
+        <div class="w64p"><img src="../img/pcb-production/sending-traces.jpg" class="squeeze-left"></div>
+      </div>
+      <p>To cut the board out of the surrounding PCB stock, I repeated this process with an outline board image, a 1/32" drill bit, and the mill's outline settings. This took another couple minutes.</p>
+      <div class="multi-image">
+        <div class="w50p"><img src="../img/pcb-production/finished-milling-1.jpg" class="squeeze-right"></div>
+        <div class="w50p"><img src="../img/pcb-production/finished-milling-2.jpg" class="squeeze-left"></div>
+      </div>
+      <p>The milling done, I brought the mill bed out from under the drill bit and vacuumed off all the PCB dust. I knifed the board off the bed and scrubbed it with a rough sponge, then rinsed it again with alcohol. Everything looked right.</p>
+      <p>Now I gathered my board components. Examining the board schematic, I wrote the components I needed on an index card next to a piece of double-stick tape, then found each component and stuck it on the tape next to its label. The surface-mount components are small and hard to distinguish, so this helps keep track of what's where.</p>
+      <div class="multi-image">
+        <div class="w50p"><img src="../img/pcb-production/board-schema.png" class="squeeze-right"></div>
+        <div class="w50p"><img src="../img/pcb-production/components.jpg" class="squeeze-left"></div>
+      </div>
+      <p>To fill the board, I turned my soldering iron to 700 F and cleaned it on the pad until the tip was shiny. (When it's not shiny it doesn't conduct as well.) I'd taped my board onto a piece of paper so I could rotate it freely but still have it locked in place whenever I was soldering. I started with the microprocessor near the middle of my board. Making sure I had the component oriented correctly (little circle on the upper left marks the first pin), I placed the tip of the solder iron on the pad, added a touch of solder, then tweezered the microprocessor into position. Initially I found it hard to keep the component aligned - human hands aren't that steady - but I learned to place the target leg into solder, align the piece with the tweezers, then hold it down with tweezers while removing the soldering iron and for a few extra seconds. At this point the solder has fixed the chip in place, and other legs can be soldered to hold everything down. At the end I went back and fixed the first one.</p>
+      <p>Soldering technique came pretty quickly to me, so I'm not sure I have many learning tips to give. A good joint is shiny, smooth, and forms a curved meniscus from the surface tension sucking it down to the board. If there's too much solder for the meniscus to show up, use less on the next joint. The only trick I found was to avoid touching the new solder to the tip of the iron, because it would bead up on the iron and be hard to place on the board. Only after it's on the board would I probe it with the iron if necessary - usually some of it flowed along the board and into contact with the iron on its own and actively probing it wasn't necessary.</p>
+      <p>I continued this process for each component, filling the board from the middle outwards. A few times I got extra solder on the board and wicked it away with some copper braid - I'd press the braid into the excess solder with the iron tip to melt solder into it. Once the board was full, I examined that my joins looked good and that I hadn't accidentally bridged two traces, but everything checked out.</p>
+      <p>Now was time to program the board. I'd put two jumpers (zero ohm resistors) on the board that enabled its programming. I connected its USB port to power and its 2x3 header to the chip that would program it, making sure to align the pins on the two boards. The other chip was plugged into a computer. The software was already written, so I compiled it on the computer and sent it to the programmer. Initially I ran into trouble because I wasn't sure which of the two boards to plug into what, but eventually I found tutorials online that led me to the setup I described above and everything worked. I disconnected the cables and removed the two jumpers to fix the board's software. To take each one off, I held it in tweezers and lifted the chip a bit into the air. I blasted the component with a heat gun until after about ten seconds the board dropped away.</p>
+      <p>I returned to the computer and connected my chip via USB. From the Mac's top toolbar, I clicked the apple icon and selected About This Mac > System Report > USB and clicked on USB Hi-Speed Bus at the top. It listed my fabISP, letting me know everything checked out. My first board was done.</p><img src="../img/pcb-production/finished-board.jpg">
+    </div>
+  </body>
+</html>

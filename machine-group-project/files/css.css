@@ -1,0 +1,89 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:300);
+
+@font-face {
+    font-family: 'ubuntu';
+    src: url('../fonts/ubuntu.eot');
+    src: url('../fonts/ubuntu.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ubuntu.woff2') format('woff2'),
+         url('../fonts/ubuntu.woff') format('woff'),
+         url('../fonts/ubuntu.ttf') format('truetype'),
+         url('../fonts/ubuntu.svg#ubuntuitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  background-color: #eeeeee;
+  color: #999999;
+  font-family: 'Dosis', Helvetica, Arial, sans-serif;
+  line-height: 1;
+}
+
+.wrapper {
+  margin: 16px auto;
+  padding: 14px 24px;
+  background-color: #ffffff;
+  width: 75%;
+}
+
+.header {
+  margin: 0px 30px;
+  border-bottom: 2px solid #cdcdcd;
+  text-align: center;
+}
+
+h1, h3 {
+  font-family: "ubuntu", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #3B9C9C;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+h2 {
+  font-family: "ubuntu", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #609690;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  font-size: 18px;
+}
+
+.intro {
+  padding-bottom: 7px;
+  font-family: "ubuntu", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.post{
+  margin-top: 20px;
+}
+
+.entry{
+  margin-bottom: 30px;
+}
+
+.caption{
+  margin-bottom: 20px;
+  font-style: italic;
+  color: #777777;
+  text-align: center;
+}
+
+code {
+font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-weight: bold;
+  font-size:small;
+  color: #9C3B3B;}
+
+.codeSnippet {
+margin: 1em 0;
+padding-left: 2em;
+text-align: left;
+background-color: #efefef;}
+}
