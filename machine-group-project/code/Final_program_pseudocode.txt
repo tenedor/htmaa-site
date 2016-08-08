@@ -1,0 +1,22 @@
+Final program pseudocode --Ben Garber, 12/8/2015
+
+Main program:
+    Load machine persistence stuff
+    Hardcoded machine state
+        (note: Is there a way to make this modular?  Is it possible to implement a better storage mode for machine descriptions within the Gestalt Node framework?)
+    Load GUI (drawing section, xyz0 setting section, sending instructions to machine section.)
+    Event loop:
+        Allow people to:
+            Draw, either in lines or in squiggles (sample for GUI events)
+            Jog the machine axes, in order to move to the new x0, y0, z0
+            Set zeroes
+            Send drawing to machine (function send_instructions_to_machine)
+            optionally:
+                Save/load machine code/drawing file
+        Update GUI
+
+function send_instructions_to_machine(instructions list):
+    for each instruction:
+        send it
+        sample for UI events (probably only pause, cancel, and update status bar)
+        delay. (1ms?)
